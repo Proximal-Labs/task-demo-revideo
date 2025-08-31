@@ -27,8 +27,8 @@ class FfmpegSettingState {
   private logLevel: LogLevel;
 
   public constructor() {
-    this.ffmpegPath = ffmpegInstaller.path as unknown as string;
-    this.ffprobePath = ffprobeInstaller.path as unknown as string;
+    this.ffmpegPath = 'ffmpeg';
+    this.ffprobePath = 'ffprobe';
 
     // Use the FFMPEG_PATH environment variable if it is set
     if (process.env.FFMPEG_PATH) {
