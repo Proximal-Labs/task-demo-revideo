@@ -24,9 +24,6 @@ export const project = makeProject({
       exporter: {
         name: '@revideo/core/wasm',
       },
-      audio: {
-        mute: false,
-      },
       fps: 30,
       resolutionScale: 1,
       colorSpace: 'srgb',
