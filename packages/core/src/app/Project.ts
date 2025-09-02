@@ -35,6 +35,10 @@ export type ExporterSettings =
       name: '@revideo/core/wasm';
     };
 
+export interface RenderingAudioSettings {
+  mute: boolean;
+}
+
 // Project settings that are used internally
 export interface ProjectSettings {
   shared: {
@@ -47,6 +51,7 @@ export interface ProjectSettings {
     fps: number;
     resolutionScale: number;
     colorSpace: CanvasColorSpace;
+    audio: RenderingAudioSettings;
   };
   preview: {
     fps: number;
@@ -66,6 +71,7 @@ export interface UserProjectSettings {
     fps: number;
     resolutionScale: number;
     colorSpace: CanvasColorSpace;
+    audio: RenderingAudioSettings;
   };
   preview: {
     fps: number;
@@ -83,6 +89,7 @@ export type RenderVideoUserProjectSettings = {
   size?: UserProjectSettings['shared']['size'];
 
   exporter?: UserProjectSettings['rendering']['exporter'];
+  audio?: UserProjectSettings['rendering']['audio'];
 };
 
 /**

@@ -44,6 +44,10 @@ export function wasmExporterPlugin(): Plugin {
               const file = files.file![0] as formidable.File;
 
               const outputPath = path.join(os.tmpdir(), tempDir, 'visuals.mp4');
+              // Ensure directory exists before writing the file
+              await fs.promises
+                .mkdir(path.dirname(outputPath), {recursive: true})
+                .catch(() => {});
               const writeStream = fs.createWriteStream(outputPath);
 
               await new Promise((resolve, reject) => {

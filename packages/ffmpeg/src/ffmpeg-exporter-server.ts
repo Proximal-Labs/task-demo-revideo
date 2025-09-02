@@ -5,6 +5,7 @@ import type {
 } from '@revideo/core';
 import {EventName, sendEvent} from '@revideo/telemetry';
 import * as ffmpeg from 'fluent-ffmpeg';
+import * as fs from 'fs';
 import * as os from 'os';
 import * as path from 'path';
 import {ImageStream} from './image-stream';
@@ -51,6 +52,12 @@ export class FFmpegExporterServer {
       os.tmpdir(),
       `revideo-${this.settings.name}-${settings.hiddenFolderId}`,
     );
+    // Ensure the job folder exists before writing any outputs
+    try {
+      fs.mkdirSync(this.jobFolder, {recursive: true});
+    } catch (_) {
+      // If the folder cannot be created, let ffmpeg error handling surface it later
+    }
     this.stream = new ImageStream();
 
     ffmpeg.setFfmpegPath(ffmpegSettings.getFfmpegPath());

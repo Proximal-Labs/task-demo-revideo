@@ -12,7 +12,7 @@ import {Vector2} from '../types';
 import {Semaphore} from '../utils';
 import {PlaybackManager, PlaybackState} from './PlaybackManager';
 import {PlaybackStatus} from './PlaybackStatus';
-import type {ExporterSettings, Project} from './Project';
+import type {ExporterSettings, RenderingAudioSettings, Project} from './Project';
 import {SharedWebGLContext} from './SharedWebGLContext';
 import type {StageSettings} from './Stage';
 import {Stage} from './Stage';
@@ -24,6 +24,7 @@ export interface RendererSettings extends StageSettings {
   fps: number;
   exporter: ExporterSettings;
   hiddenFolderId?: string;
+  audio?: RenderingAudioSettings;
 }
 
 export interface AssetInfo {
@@ -277,7 +278,7 @@ export class Renderer {
 
     // Start audio export
     let generateAudioPromise;
-    if (this.exporter && this.exporter.generateAudio) {
+    if (this.exporter && this.exporter.generateAudio && !settings.audio?.mute) {
       generateAudioPromise = this.exporter.generateAudio(
         mediaByFrames,
         from,
@@ -333,7 +334,8 @@ export class Renderer {
       result === RendererResult.Success &&
       this.exporter &&
       this.exporter.mergeMedia &&
-      generateAudioPromise
+      generateAudioPromise &&
+      !settings.audio?.mute
     ) {
       try {
         await generateAudioPromise;
