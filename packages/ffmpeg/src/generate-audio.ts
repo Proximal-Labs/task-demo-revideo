@@ -220,6 +220,7 @@ export async function generateAudio({
   startFrame,
   endFrame,
   fps,
+  speed = 1,
 }: {
   outputDir: string;
   tempDir: string;
@@ -227,6 +228,7 @@ export async function generateAudio({
   startFrame: number;
   endFrame: number;
   fps: number;
+  speed?: number;
 }) {
   const fullTempDir = path.join(os.tmpdir(), tempDir);
   await makeSureFolderExists(outputDir);
@@ -243,11 +245,12 @@ export async function generateAudio({
       );
     }
 
-    if (asset.playbackRate !== 0 && asset.volume !== 0 && hasAudioStream) {
-      const filename = await prepareAudio(
+    const effectiveRate = asset.playbackRate * speed;
+    if (effectiveRate !== 0 && asset.volume !== 0 && hasAudioStream) {
+        const filename = await prepareAudio(
         outputDir,
         fullTempDir,
-        asset,
+        {...asset, playbackRate: effectiveRate},
         startFrame,
         endFrame,
         fps,

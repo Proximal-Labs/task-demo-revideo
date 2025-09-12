@@ -17,6 +17,7 @@ export const defaultUserProjectSettings: UserProjectSettings = {
     fps: 30,
     resolutionScale: 1,
     colorSpace: 'srgb',
+    speed: 1,
   },
   preview: {
     fps: 30,

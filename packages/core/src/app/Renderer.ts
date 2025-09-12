@@ -24,6 +24,7 @@ export interface RendererSettings extends StageSettings {
   fps: number;
   exporter: ExporterSettings;
   hiddenFolderId?: string;
+  speed?: number;
 }
 
 export interface AssetInfo {
@@ -253,6 +254,7 @@ export class Renderer {
     }
     this.stage.configure(settings);
     this.playback.fps = settings.fps;
+    this.playback.speed = settings.speed ?? 1;
     this.playback.state = PlaybackState.Rendering;
     const from = this.status.secondsToFrames(settings.range[0]);
     this.frame.current = from;

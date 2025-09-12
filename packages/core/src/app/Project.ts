@@ -47,6 +47,7 @@ export interface ProjectSettings {
     fps: number;
     resolutionScale: number;
     colorSpace: CanvasColorSpace;
+    speed: number;
   };
   preview: {
     fps: number;
@@ -66,6 +67,7 @@ export interface UserProjectSettings {
     fps: number;
     resolutionScale: number;
     colorSpace: CanvasColorSpace;
+    speed: number;
   };
   preview: {
     fps: number;
@@ -83,6 +85,8 @@ export type RenderVideoUserProjectSettings = {
   size?: UserProjectSettings['shared']['size'];
 
   exporter?: UserProjectSettings['rendering']['exporter'];
+
+  speed?: number;
 };
 
 /**

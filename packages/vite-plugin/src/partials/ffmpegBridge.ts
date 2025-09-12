@@ -69,14 +69,14 @@ export function ffmpegBridgePlugin({output}: ExporterPluginConfig): Plugin {
         handlePostRequest(
           req,
           res,
-          async ({tempDir, assets, startFrame, endFrame, fps}) =>
-            generateAudio({
+          async ({tempDir, assets, startFrame, endFrame, fps, speed}) =>            generateAudio({
               outputDir: output,
               tempDir,
               assets,
               startFrame,
               endFrame,
               fps,
+              speed,
             }),
         ),
       );

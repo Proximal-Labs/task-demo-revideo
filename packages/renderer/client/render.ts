@@ -65,6 +65,7 @@ export const render = async (
       ...overwriteRenderSettings,
       background,
       size,
+      speed: overwriteRenderSettings.speed ?? renderSettingsFromProject.speed ?? 1,
       range: [
         renderer.frameToTime(firstWorkerFrame),
         renderer.frameToTime(lastWorkerFrame),

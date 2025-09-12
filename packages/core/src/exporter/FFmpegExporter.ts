@@ -133,6 +133,7 @@ export class FFmpegExporterClient implements Exporter {
         startFrame,
         endFrame,
         fps: this.settings.fps,
+        speed: (this.settings as any).speed ?? 1,
       }),
     });
   }

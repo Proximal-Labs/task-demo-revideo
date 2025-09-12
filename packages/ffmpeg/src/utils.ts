@@ -161,6 +161,7 @@ export async function mergeAudioWithVideo(
         audioCodec,
         '-strict',
         'experimental',
+        '-shortest',
       ])
       .on('end', () => {
         resolve();
